@@ -15,14 +15,15 @@ def sift(image1,image2):
 # Apply ratio test
     good = []
     for m,n in matches:
-        if m.distance < 0.78*n.distance:
+        if m.distance < 0.7*n.distance:
             good.append([m])
 # cv.drawMatchesKnn expects list of lists as matches.
     img3 = cv.drawMatchesKnn(img1,kp1,img2,kp2,good,None,flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
-    cv.imwrite("siftdicessim/"+image1[-14:],img3)
+    cv.imwrite("sift"+sys.argv[1]+"/"+image1[-14:],img3)
 import os
-if not os.path.exists("siftdicessim"):
-    os.mkdir("siftdicessim")
+import sys
+if not os.path.exists("sift"+sys.argv[1]):
+    os.mkdir("sift"+sys.argv[1])
 from tqdm import tqdm
-for img in tqdm(os.listdir("dicessim/image")):
-    sift("dicessim/image/"+img,"original/"+img)
+for img in tqdm(os.listdir(sys.argv[1]+"/image")):
+    sift(sys.argv[1]+"/image/"+img,"original/"+img)
