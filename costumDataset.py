@@ -124,7 +124,25 @@ class depthset(Dataset):
     def __len__(self):
         return self.nbdata
 
+class feriel(Dataset):
+    def __init__(self, path):
+        self.path = path
+        self.data = []
+        _tmp=os.listdir(path)
+        _tmp = [self.path + '/' + x for x in _tmp]
+        self.data.extend(_tmp)
+        self.nbdata = len(self.data)
+        #if shuffle true, the data will be shuffeled before loading (used only in test data, in the trainign data is shuffeled using the loaded)
 
+
+    def __getitem__(self, index):
+        x = Image.open(self.data[index])
+        x = config.transform(x)
+
+        return x,self.data[index][-11:]
+
+    def __len__(self):
+        return self.nbdata
 if __name__ == "__main__":
     dataset = Kaiset(r'C:\Users\dell\Desktop\safe')
     loader = DataLoader(dataset, batch_size=6, shuffle=True)
