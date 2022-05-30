@@ -15,7 +15,7 @@ for i in tqdm(os.listdir(sys.argv[1]+"/image")):
     reel=cv.imread(sys.argv[3]+"/"+i,0)
     histr=cv.calcHist([reel],[0],None,[256],[0,256])
     histr = [x[0] for x in histr]
-    h=[abs(x-y) for x in hist for y in histr]
+    h=[abs(hist[i]-histr[i]) for i in range(len(hist))]
     x.bar(left=range(256),height= h,zs=cpt,zdir="y")
     cpt+=1
 
