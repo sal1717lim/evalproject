@@ -15,4 +15,4 @@ for i in tqdm(os.listdir(sys.argv[1]+"\\image")):
     x.bar(left=range(256),height= [x[0] for x in hist],zs=cpt,zdir="y")
     cpt+=1
 
-plt.savefig(r"C:\Users\SALIM\PycharmProjects\evalproject\histogramme\\"+sys.argv[2]+".png")
+plt.savefig(sys.argv[2]+".png")
